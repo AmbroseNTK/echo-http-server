@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the Docker image
-                sh 'docker build -t echohttp:${env.BUILD_NUMBER} .'
+                sh "docker build -t echohttp:${env.BUILD_NUMBER} ."
             }
         }
         // stage('Push') {
