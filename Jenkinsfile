@@ -1,21 +1,5 @@
 pipeline {
-   agent {
-        kubernetes {
-            label 'docker-builder'
-            yaml """
-            apiVersion: v1
-            kind: Pod
-            metadata:
-              labels:
-                app: docker-builder
-            spec:
-              containers:
-              - name: docker
-                image: docker:latest
-            """
-        }
-    }
-
+    agent any
     stages {
         stage('Build') {
             steps {
