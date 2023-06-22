@@ -1,8 +1,31 @@
 pipeline {
-    agent {
-        docker {
-            image "docker:latest"
-            args "-v /var/run/docker.sock:/var/run/docker.sock"
+   agent {
+        kubernetes {
+            label 'docker-builder'
+            defaultContainer 'jnlp'
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                app: docker-builder
+            spec:
+              containers:
+              - name: docker
+                image: docker:latest
+                volumeMounts:
+                - name: docker-sock
+                  mountPath: /var/run/docker.sock
+              - name: jnlp
+                image: jenkins/jnlp-slave:latest
+                command:
+                - cat
+                tty: true
+              volumes:
+              - name: docker-sock
+                hostPath:
+                  path: /var/run/docker.sock
+            """
         }
     }
 
