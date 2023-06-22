@@ -2,7 +2,6 @@ pipeline {
    agent {
         kubernetes {
             label 'docker-builder'
-            defaultContainer 'jnlp'
             yaml """
             apiVersion: v1
             kind: Pod
@@ -13,18 +12,6 @@ pipeline {
               containers:
               - name: docker
                 image: docker:latest
-                volumeMounts:
-                - name: docker-sock
-                  mountPath: /var/run/docker.sock
-              - name: jnlp
-                image: jenkins/jnlp-slave:latest
-                command:
-                - cat
-                tty: true
-              volumes:
-              - name: docker-sock
-                hostPath:
-                  path: /var/run/docker.sock
             """
         }
     }
