@@ -6,15 +6,21 @@ pipeline {
   }
 
 
-    agent { dockerfile true }
+    agent { 
+        dockerfile {
+            filename 'Dockerfile'
+            registryUrl 'https://registry.hub.docker.com'
+            registryCredentialsId 'dockerhub-credentials'
+        } 
+    }
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/AmbroseNTK/echo-http-server'
-      }
-    }
+    // stage('Checkout Source') {
+    //   steps {
+    //     git 'https://github.com/AmbroseNTK/echo-http-server'
+    //   }
+    // }
 
     stage('Build image') {
       steps{
