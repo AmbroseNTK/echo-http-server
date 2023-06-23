@@ -8,9 +8,7 @@ pipeline {
 
     agent { 
         dockerfile {
-            filename 'Dockerfile'
-            registryUrl 'https://registry.hub.docker.com'
-            registryCredentialsId 'dockerhub-credentials'
+            true
         } 
     }
 
