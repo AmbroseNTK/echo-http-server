@@ -10,6 +10,10 @@ pipeline {
         dockerfile true
     }
 
+    tools {
+        dockerTool 'jenkins-docker'
+    }
+
   stages {
 
     // stage('Checkout Source') {
